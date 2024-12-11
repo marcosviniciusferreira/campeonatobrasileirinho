@@ -91,43 +91,50 @@ public class ReportarResultados extends javax.swing.JFrame {
 
     private void atualizarVisitante() {
         // Recupera o item selecionado no cbMandante
-        String selecaoAtual = (String) cbVisitante.getSelectedItem();
-        String timeSelecionado = (String) cbMandante.getSelectedItem();
+        Time selecaoAtual = (Time) cbVisitante.getSelectedItem();
+        Time timeSelecionado = (Time) cbMandante.getSelectedItem();
 
+        javax.swing.DefaultComboBoxModel model = new javax.swing.DefaultComboBoxModel();
+        
         // Limpa os itens existentes no cbVisitante
-        cbVisitante.removeAllItems();
-        cbVisitante.addItem("Selecione");
-
-        // Adiciona somente os times diferentes do selecionado no cbMandante
+        model.removeAllElements();
+        model.addElement("Selecione");
+        
         if (Torneio.listaEquipes != null) {
             for (Time time : Torneio.listaEquipes) {
-                if (!time.getNome().equals(timeSelecionado)) {
-                    cbVisitante.addItem(time.getNome());
+                if (!time.getNome().equals(timeSelecionado.getNome())) {
+                    model.addElement(time);
                 }
             }
         }
+        
+        cbVisitante.setModel(model);
+        
         cbVisitante.setSelectedItem(selecaoAtual);
     }
 
     private void atualizarMandante() {
 
-        String selecaoAtual = (String) cbMandante.getSelectedItem();
-        // Recupera o item selecionado no cbMandante
-        String timeSelecionado = (String) cbVisitante.getSelectedItem();
+        Time selecaoAtual = (Time) cbMandante.getSelectedItem();
+        Time timeSelecionado = (Time) cbVisitante.getSelectedItem();
 
+        javax.swing.DefaultComboBoxModel model = new javax.swing.DefaultComboBoxModel();
+        
         // Limpa os itens existentes no cbVisitante
-        cbMandante.removeAllItems();
-        cbMandante.addItem("Selecione");
+        model.removeAllElements();
 
+        model.addElement("Selecione");
+        
         // Adiciona somente os times diferentes do selecionado no cbMandante
         if (Torneio.listaEquipes != null) {
             for (Time time : Torneio.listaEquipes) {
-                if (!time.getNome().equals(timeSelecionado)) {
-                    cbMandante.addItem(time.getNome());
+                if (!time.getNome().equals(timeSelecionado.getNome())) {
+                    model.addElement(time);
                 }
             }
         }
 
+        cbMandante.setModel(model);
         cbMandante.setSelectedItem(selecaoAtual);
     }
 
@@ -172,11 +179,11 @@ public class ReportarResultados extends javax.swing.JFrame {
         cbVisitante = new javax.swing.JComboBox<>();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
-        inputNome3 = new javax.swing.JTextField();
+        golsMandante = new javax.swing.JTextField();
         jLabel20 = new javax.swing.JLabel();
         cbMandante = new javax.swing.JComboBox<>();
         jLabel21 = new javax.swing.JLabel();
-        inputNome4 = new javax.swing.JTextField();
+        golsVisitante = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblResultados = new javax.swing.JTable();
@@ -527,13 +534,17 @@ public class ReportarResultados extends javax.swing.JFrame {
                         .addContainerGap())))
         );
 
-        cbVisitante.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione"}));
+        javax.swing.DefaultComboBoxModel model = new javax.swing.DefaultComboBoxModel();
+
+        model.addElement("Selecione");
+
         // Adiciona as equipes ao JComboBox
         if (Torneio.listaEquipes != null) {
             for (Time time : Torneio.listaEquipes) {
-                cbVisitante.addItem(time.getNome()); // Corrigido para cbVisitante
+                model.addElement(time); // Corrigido para cbVisitante
             }
         }
+        cbVisitante.setModel(model);
         cbVisitante.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbVisitanteActionPerformed(evt);
@@ -550,9 +561,9 @@ public class ReportarResultados extends javax.swing.JFrame {
         jLabel15.setForeground(new java.awt.Color(199, 254, 1));
         jLabel15.setText("Gols");
 
-        inputNome3.addActionListener(new java.awt.event.ActionListener() {
+        golsMandante.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                inputNome3ActionPerformed(evt);
+                golsMandanteActionPerformed(evt);
             }
         });
 
@@ -561,13 +572,17 @@ public class ReportarResultados extends javax.swing.JFrame {
         jLabel20.setForeground(new java.awt.Color(199, 254, 1));
         jLabel20.setText("Mandante");
 
-        cbMandante.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione"}));
-        // Adiciona as equipes ao JComboBox
+        javax.swing.DefaultComboBoxModel modeloMandante = new javax.swing.DefaultComboBoxModel();
+
+        modeloMandante.addElement("Selecione");
+
         if (Torneio.listaEquipes != null) {
             for (Time time : Torneio.listaEquipes) {
-                cbMandante.addItem(time.getNome());
+                modeloMandante.addElement(time); // Adiciona o objeto Time diretamente ao modelo
             }
         }
+        cbMandante.setModel(modeloMandante);
+        // Adiciona as equipes ao JComboBox
         cbMandante.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbMandanteActionPerformed(evt);
@@ -579,9 +594,9 @@ public class ReportarResultados extends javax.swing.JFrame {
         jLabel21.setForeground(new java.awt.Color(199, 254, 1));
         jLabel21.setText("Visitante");
 
-        inputNome4.addActionListener(new java.awt.event.ActionListener() {
+        golsVisitante.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                inputNome4ActionPerformed(evt);
+                golsVisitanteActionPerformed(evt);
             }
         });
 
@@ -638,14 +653,14 @@ public class ReportarResultados extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel20)
                                 .addGap(32, 32, 32)))
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(inputNome3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(53, 53, 53)
-                                .addComponent(jLabel16)))
-                        .addGap(18, 18, 18)
+                                .addComponent(golsMandante, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel16)
+                                .addGap(52, 52, 52)))
                         .addComponent(jLabel14)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -654,7 +669,7 @@ public class ReportarResultados extends javax.swing.JFrame {
                                 .addGap(47, 47, 47))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(inputNome4, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(golsVisitante, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(17, 17, 17)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cbVisitante, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -678,7 +693,7 @@ public class ReportarResultados extends javax.swing.JFrame {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(cbMandante, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(inputNome3, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(golsMandante, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(jLabel21)
@@ -689,7 +704,7 @@ public class ReportarResultados extends javax.swing.JFrame {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(cbVisitante, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(inputNome4, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(golsVisitante, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGap(1, 1, 1)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -768,23 +783,17 @@ public class ReportarResultados extends javax.swing.JFrame {
         atualizarMandante();
     }//GEN-LAST:event_cbVisitanteActionPerformed
 
-    private void inputNome3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputNome3ActionPerformed
+    private void golsMandanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_golsMandanteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_inputNome3ActionPerformed
+    }//GEN-LAST:event_golsMandanteActionPerformed
 
     private void cbMandanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbMandanteActionPerformed
         atualizarVisitante();
-        //else{
-//            System.out.println("else");
-////            String visitanteSelecionado = (String) cbVisitante.getSelectedItem();
-////            atualizarVisitante();
-////            cbVisitante.setSelectedItem(visitanteSelecionado);
-//        }
     }//GEN-LAST:event_cbMandanteActionPerformed
 
-    private void inputNome4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputNome4ActionPerformed
+    private void golsVisitanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_golsVisitanteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_inputNome4ActionPerformed
+    }//GEN-LAST:event_golsVisitanteActionPerformed
 
     private void tblResultadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblResultadosMouseClicked
 
@@ -902,11 +911,11 @@ public class ReportarResultados extends javax.swing.JFrame {
     private javax.swing.JButton btnTelaCadastrar5;
     private javax.swing.JComboBox<String> cbMandante;
     private javax.swing.JComboBox<String> cbVisitante;
+    private javax.swing.JTextField golsMandante;
+    private javax.swing.JTextField golsVisitante;
     private javax.swing.JTextField inputBonus;
     private javax.swing.JTextField inputHoraExtra;
     private javax.swing.JTextField inputNome2;
-    private javax.swing.JTextField inputNome3;
-    private javax.swing.JTextField inputNome4;
     private javax.swing.JTextField inputQuantDepen;
     private javax.swing.JTextField inputSalario;
     private javax.swing.JTextField inputVT;

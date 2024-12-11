@@ -1,6 +1,10 @@
 package br.com.campeonatobrasileiro.jogos.view;
 
+import br.com.campeonatobrasileiro.jogos.model.Time;
+import br.com.campeonatobrasileiro.jogos.model.Torneio;
+import static br.com.campeonatobrasileiro.jogos.model.Torneio.listaEquipes;
 import java.awt.Color;
+import java.util.Arrays;
 
 public class StatusTime extends javax.swing.JFrame {
 
@@ -24,19 +28,19 @@ public class StatusTime extends javax.swing.JFrame {
         btnTelaCadastrar5 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        listJornada2 = new javax.swing.JComboBox<>();
+        cbApresentacaoTime = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
+        nomeTime = new javax.swing.JLabel();
+        anoFundacao = new javax.swing.JLabel();
+        cidadeNatal = new javax.swing.JLabel();
+        qtdVitorias = new javax.swing.JLabel();
+        qtdEmpates = new javax.swing.JLabel();
+        qtdDerrotas = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAutoRequestFocus(false);
@@ -95,13 +99,11 @@ public class StatusTime extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addContainerGap(27, Short.MAX_VALUE))
+                    .addComponent(jLabel4)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(8, 8, 8)
-                        .addComponent(btnTelaCadastrar5, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(25, Short.MAX_VALUE))))
+                        .addComponent(btnTelaCadastrar5, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(25, Short.MAX_VALUE))
             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel3Layout.createSequentialGroup()
                     .addGap(16, 16, 16)
@@ -113,10 +115,19 @@ public class StatusTime extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(199, 254, 1));
         jLabel2.setText("Escolha o time");
 
-        listJornada2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione","180", "200", "220" }));
-        listJornada2.addActionListener(new java.awt.event.ActionListener() {
+        javax.swing.DefaultComboBoxModel model = new javax.swing.DefaultComboBoxModel();
+
+        model.addElement("Selecione");
+
+        if (Torneio.listaEquipes != null) {
+            for (Time time : Torneio.listaEquipes) {
+                model.addElement(time); // Adiciona o objeto Time diretamente ao modelo
+            }
+        }
+        cbApresentacaoTime.setModel(model);
+        cbApresentacaoTime.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                listJornada2ActionPerformed(evt);
+                cbApresentacaoTimeActionPerformed(evt);
             }
         });
 
@@ -150,35 +161,29 @@ public class StatusTime extends javax.swing.JFrame {
         jLabel10.setForeground(new java.awt.Color(199, 254, 1));
         jLabel10.setText("Derrotas:");
 
-        jLabel11.setBackground(new java.awt.Color(199, 254, 1));
-        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel11.setText("Fulano");
+        nomeTime.setBackground(new java.awt.Color(199, 254, 1));
+        nomeTime.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        nomeTime.setForeground(new java.awt.Color(255, 255, 255));
 
-        jLabel12.setBackground(new java.awt.Color(199, 254, 1));
-        jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel12.setText("1949");
+        anoFundacao.setBackground(new java.awt.Color(199, 254, 1));
+        anoFundacao.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        anoFundacao.setForeground(new java.awt.Color(255, 255, 255));
 
-        jLabel13.setBackground(new java.awt.Color(199, 254, 1));
-        jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel13.setText("Xique-Xique/BA");
+        cidadeNatal.setBackground(new java.awt.Color(199, 254, 1));
+        cidadeNatal.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        cidadeNatal.setForeground(new java.awt.Color(255, 255, 255));
 
-        jLabel14.setBackground(new java.awt.Color(199, 254, 1));
-        jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel14.setText("10");
+        qtdVitorias.setBackground(new java.awt.Color(199, 254, 1));
+        qtdVitorias.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        qtdVitorias.setForeground(new java.awt.Color(255, 255, 255));
 
-        jLabel15.setBackground(new java.awt.Color(199, 254, 1));
-        jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel15.setText("6");
+        qtdEmpates.setBackground(new java.awt.Color(199, 254, 1));
+        qtdEmpates.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        qtdEmpates.setForeground(new java.awt.Color(255, 255, 255));
 
-        jLabel16.setBackground(new java.awt.Color(199, 254, 1));
-        jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel16.setText("5");
+        qtdDerrotas.setBackground(new java.awt.Color(199, 254, 1));
+        qtdDerrotas.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        qtdDerrotas.setForeground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -193,34 +198,34 @@ public class StatusTime extends javax.swing.JFrame {
                         .addComponent(jLabel2))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(183, 183, 183)
-                        .addComponent(listJornada2, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(cbApresentacaoTime, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(135, 135, 135)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel14)
+                                .addComponent(qtdVitorias)
                                 .addGap(84, 84, 84)
                                 .addComponent(jLabel9)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel15)
+                                .addComponent(qtdEmpates)
                                 .addGap(111, 111, 111)
                                 .addComponent(jLabel10)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel16))
+                                .addComponent(qtdDerrotas))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel11))
+                                .addComponent(nomeTime))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel7)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel13))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(cidadeNatal))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel12)))))
+                                .addComponent(anoFundacao)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -230,27 +235,27 @@ public class StatusTime extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(listJornada2, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+                .addComponent(cbApresentacaoTime, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
                 .addGap(58, 58, 58)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jLabel11))
+                    .addComponent(nomeTime))
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(jLabel13))
+                    .addComponent(cidadeNatal))
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(jLabel12))
+                    .addComponent(anoFundacao))
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(jLabel9)
                     .addComponent(jLabel10)
-                    .addComponent(jLabel14)
-                    .addComponent(jLabel15)
-                    .addComponent(jLabel16))
+                    .addComponent(qtdVitorias)
+                    .addComponent(qtdEmpates)
+                    .addComponent(qtdDerrotas))
                 .addGap(58, 58, 58)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -266,9 +271,16 @@ public class StatusTime extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnTelaCadastrar5ActionPerformed
 
-    private void listJornada2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listJornada2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_listJornada2ActionPerformed
+    private void cbApresentacaoTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbApresentacaoTimeActionPerformed
+        Time selecionado = (Time) cbApresentacaoTime.getSelectedItem();
+        nomeTime.setText(selecionado.getNome());
+        anoFundacao.setText(Integer.toString(selecionado.getAno_fundacao()));
+        cidadeNatal.setText(selecionado.getCidade());
+        qtdDerrotas.setText(Integer.toString(selecionado.getDerrotas()));
+        qtdEmpates.setText(Integer.toString(selecionado.getEmpates()));
+        qtdVitorias.setText(Integer.toString(selecionado.getVitorias()));
+        
+    }//GEN-LAST:event_cbApresentacaoTimeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -321,14 +333,11 @@ public class StatusTime extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel anoFundacao;
     private javax.swing.JButton btnTelaCadastrar5;
+    private javax.swing.JComboBox<String> cbApresentacaoTime;
+    private javax.swing.JLabel cidadeNatal;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -339,6 +348,9 @@ public class StatusTime extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JComboBox<String> listJornada2;
+    private javax.swing.JLabel nomeTime;
+    private javax.swing.JLabel qtdDerrotas;
+    private javax.swing.JLabel qtdEmpates;
+    private javax.swing.JLabel qtdVitorias;
     // End of variables declaration//GEN-END:variables
 }

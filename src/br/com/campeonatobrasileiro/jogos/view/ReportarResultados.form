@@ -487,17 +487,17 @@
                               <EmptySpace min="32" pref="32" max="-2" attributes="0"/>
                           </Group>
                       </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="inputNome3" min="-2" pref="100" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="golsMandante" min="-2" pref="100" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
+                          <Group type="102" alignment="1" attributes="0">
                               <Component id="jLabel16" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                       <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
@@ -507,7 +507,7 @@
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="inputNome4" min="-2" pref="95" max="-2" attributes="0"/>
+                              <Component id="golsVisitante" min="-2" pref="95" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -540,7 +540,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="cbMandante" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
-                              <Component id="inputNome3" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
+                              <Component id="golsMandante" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
@@ -555,7 +555,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="cbVisitante" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
-                              <Component id="inputNome4" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
+                              <Component id="golsVisitante" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
                       </Group>
@@ -665,14 +665,14 @@
     <Component class="javax.swing.JComboBox" name="cbVisitante">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(new String[] { &quot;Selecione&quot;})" type="code"/>
+          <Connection code="model" type="code"/>
         </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbVisitanteActionPerformed"/>
       </Events>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="// Adiciona as equipes ao JComboBox&#xa;if (Torneio.listaEquipes != null) {&#xa;    for (Time time : Torneio.listaEquipes) {&#xa;        cbVisitante.addItem(time.getNome()); // Corrigido para cbVisitante&#xa;    }&#xa;}"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="javax.swing.DefaultComboBoxModel model = new javax.swing.DefaultComboBoxModel();&#xa;&#xa;model.addElement(&quot;Selecione&quot;);&#xa;&#xa;// Adiciona as equipes ao JComboBox&#xa;if (Torneio.listaEquipes != null) {&#xa;    for (Time time : Torneio.listaEquipes) {&#xa;        model.addElement(time); // Corrigido para cbVisitante&#xa;    }&#xa;}"/>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
     </Component>
@@ -704,9 +704,9 @@
         <Property name="text" type="java.lang.String" value="Gols"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="inputNome3">
+    <Component class="javax.swing.JTextField" name="golsMandante">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="inputNome3ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="golsMandanteActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel20">
@@ -726,14 +726,15 @@
     <Component class="javax.swing.JComboBox" name="cbMandante">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(new String[] { &quot;Selecione&quot;})" type="code"/>
+          <Connection code="modeloMandante" type="code"/>
         </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbMandanteActionPerformed"/>
       </Events>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="// Adiciona as equipes ao JComboBox&#xa;if (Torneio.listaEquipes != null) {&#xa;    for (Time time : Torneio.listaEquipes) {&#xa;        cbMandante.addItem(time.getNome());&#xa;    }&#xa;}"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="// Adiciona as equipes ao JComboBox"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="javax.swing.DefaultComboBoxModel modeloMandante = new javax.swing.DefaultComboBoxModel();&#xa;&#xa;modeloMandante.addElement(&quot;Selecione&quot;);&#xa;&#xa;if (Torneio.listaEquipes != null) {&#xa;    for (Time time : Torneio.listaEquipes) {&#xa;        modeloMandante.addElement(time); // Adiciona o objeto Time diretamente ao modelo&#xa;    }&#xa;}"/>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
     </Component>
@@ -751,9 +752,9 @@
         <Property name="text" type="java.lang.String" value="Visitante"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="inputNome4">
+    <Component class="javax.swing.JTextField" name="golsVisitante">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="inputNome4ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="golsVisitanteActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel16">
