@@ -83,10 +83,16 @@ public final class Time {
     
     public void JogoVencido(Time time, int vitorias){
         time.setPontos(time.getPontos() + (3 * vitorias));
+        time.setVitorias(time.getVitorias()+vitorias);
     }
     
     public void JogoEmpatado(Time time, int empates){
         time.setPontos(time.getPontos() + (1*empates));
+        time.setEmpates(time.getEmpates()+empates);
+    }
+    
+    public void JogoPerdido(Time time, int derrotas){
+        time.setDerrotas(time.getDerrotas()+1);
     }
     
 

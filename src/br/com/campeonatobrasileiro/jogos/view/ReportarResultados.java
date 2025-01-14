@@ -2,6 +2,7 @@ package br.com.campeonatobrasileiro.jogos.view;
 
 import br.com.campeonatobrasileiro.jogos.model.Time;
 import br.com.campeonatobrasileiro.jogos.model.Torneio;
+import static br.com.campeonatobrasileiro.jogos.model.Torneio.listaEquipes;
 import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
@@ -95,11 +96,11 @@ public class ReportarResultados extends javax.swing.JFrame {
         Time timeSelecionado = (Time) cbMandante.getSelectedItem();
 
         javax.swing.DefaultComboBoxModel model = new javax.swing.DefaultComboBoxModel();
-        
+
         // Limpa os itens existentes no cbVisitante
         model.removeAllElements();
         model.addElement("Selecione");
-        
+
         if (Torneio.listaEquipes != null) {
             for (Time time : Torneio.listaEquipes) {
                 if (!time.getNome().equals(timeSelecionado.getNome())) {
@@ -107,9 +108,9 @@ public class ReportarResultados extends javax.swing.JFrame {
                 }
             }
         }
-        
+
         cbVisitante.setModel(model);
-        
+
         cbVisitante.setSelectedItem(selecaoAtual);
     }
 
@@ -119,12 +120,12 @@ public class ReportarResultados extends javax.swing.JFrame {
         Time timeSelecionado = (Time) cbVisitante.getSelectedItem();
 
         javax.swing.DefaultComboBoxModel model = new javax.swing.DefaultComboBoxModel();
-        
+
         // Limpa os itens existentes no cbVisitante
         model.removeAllElements();
 
         model.addElement("Selecione");
-        
+
         // Adiciona somente os times diferentes do selecionado no cbMandante
         if (Torneio.listaEquipes != null) {
             for (Time time : Torneio.listaEquipes) {
@@ -187,7 +188,7 @@ public class ReportarResultados extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblResultados = new javax.swing.JTable();
-        btCadastrar = new javax.swing.JButton();
+        btCadastrarResultado = new javax.swing.JButton();
 
         jFrame1.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -628,13 +629,13 @@ public class ReportarResultados extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblResultados);
 
-        btCadastrar.setBackground(new java.awt.Color(199, 254, 1));
-        btCadastrar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btCadastrar.setForeground(new java.awt.Color(25, 30, 99));
-        btCadastrar.setText("Cadastrar Resultado");
-        btCadastrar.addActionListener(new java.awt.event.ActionListener() {
+        btCadastrarResultado.setBackground(new java.awt.Color(199, 254, 1));
+        btCadastrarResultado.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btCadastrarResultado.setForeground(new java.awt.Color(25, 30, 99));
+        btCadastrarResultado.setText("Cadastrar Resultado");
+        btCadastrarResultado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btCadastrarActionPerformed(evt);
+                btCadastrarResultadoActionPerformed(evt);
             }
         });
 
@@ -678,7 +679,7 @@ public class ReportarResultados extends javax.swing.JFrame {
                                 .addComponent(jLabel21)))
                         .addGap(134, 134, 134))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btCadastrarResultado, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(441, 441, 441))))
         );
         layout.setVerticalGroup(
@@ -710,7 +711,7 @@ public class ReportarResultados extends javax.swing.JFrame {
                         .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(2, 2, 2)))
                 .addGap(24, 24, 24)
-                .addComponent(btCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, Short.MAX_VALUE)
+                .addComponent(btCadastrarResultado, javax.swing.GroupLayout.PREFERRED_SIZE, 33, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -799,9 +800,74 @@ public class ReportarResultados extends javax.swing.JFrame {
 
     }//GEN-LAST:event_tblResultadosMouseClicked
 
-    private void btCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastrarActionPerformed
+    private void btCadastrarResultadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastrarResultadoActionPerformed
+        int golsM, golsV;
+        golsM = Integer.valueOf(golsMandante.getText());
+        golsV = Integer.valueOf(golsVisitante.getText());
 
-    }//GEN-LAST:event_btCadastrarActionPerformed
+        if (golsM > golsV) {
+            for (Time timeM : listaEquipes) {
+                if (timeM.getNome().equals(cbMandante.getSelectedItem())) {
+                    timeM.JogoVencido(timeM, 1);
+                    timeM.AtualizaPontos(timeM);
+                }
+
+                for (Time derrotadoV : listaEquipes) {
+                    if (derrotadoV.getNome().equals(cbVisitante.getSelectedItem())) {
+                        derrotadoV.JogoPerdido(derrotadoV, 1);
+                        derrotadoV.AtualizaPontos(derrotadoV);
+                    }
+                }
+            }
+        } else if (golsV > golsM) {
+            for (Time timeV : listaEquipes) {
+                if (timeV.getNome().equals(cbVisitante.getSelectedItem())) {
+                    timeV.JogoVencido(timeV, 1);
+                    timeV.AtualizaPontos(timeV);
+                }
+            }
+
+            for (Time derrotadoM : listaEquipes) {
+                if (derrotadoM.getNome().equals(cbMandante.getSelectedItem())) {
+                    derrotadoM.JogoPerdido(derrotadoM, 1);
+                    derrotadoM.AtualizaPontos(derrotadoM);
+                }
+            }
+        } else {
+            for (Time timeEM : listaEquipes) {
+                if (timeEM.getNome().equals(cbMandante.getSelectedItem())) {
+                    timeEM.JogoEmpatado(timeEM, 1);
+                    timeEM.AtualizaPontos(timeEM);
+                }
+            }
+
+            for (Time timeEV : listaEquipes) {
+                if (timeEV.getNome().equals(cbVisitante.getSelectedItem())) {
+                    timeEV.JogoEmpatado(timeEV, 1);
+                    timeEV.AtualizaPontos(timeEV);
+                }
+            }
+        }
+        
+        
+        
+        DefaultTableModel model = (DefaultTableModel) tblResultados.getModel();
+        // Preencher a tabela apenas se lis+taEquipes não estiver vazia
+        for (int time = 0; time < Torneio.listaEquipes.size(); time++) {
+            model.addRow(new Object[]{
+                Torneio.listaEquipes.get(time).getNome(),
+                Torneio.listaEquipes.get(time).getPontos(),
+                Torneio.listaEquipes.get(time).getJogos(),
+                Torneio.listaEquipes.get(time).getVitorias(),
+                Torneio.listaEquipes.get(time).getEmpates(),
+                Torneio.listaEquipes.get(time).getDerrotas(),});
+        }
+
+        Negrito(tblResultados);
+        OrdenaPorPontos(tblResultados);
+        
+        ;
+    }//GEN-LAST:event_btCadastrarResultadoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -904,7 +970,7 @@ public class ReportarResultados extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel botaoMinimizar;
     private javax.swing.JLabel botaoMinimizar1;
-    private javax.swing.JButton btCadastrar;
+    private javax.swing.JButton btCadastrarResultado;
     private javax.swing.JButton btnNovoFuncionario;
     private javax.swing.JButton btnSair;
     private javax.swing.JButton btnSair1;
