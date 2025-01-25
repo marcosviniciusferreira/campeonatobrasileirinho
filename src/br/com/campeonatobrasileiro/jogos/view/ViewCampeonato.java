@@ -290,9 +290,11 @@ public class ViewCampeonato extends javax.swing.JFrame {
     }//GEN-LAST:event_tblCampeonatoMouseClicked
 
     private void btCriarNovoTorneioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCriarNovoTorneioActionPerformed
-        NovoTorneio torneio1 = new NovoTorneio();
-        torneio1.setVisible(true);
-        this.dispose();
+        this.setVisible(false);
+        Torneio.CriarNovoTorneio();
+        CadastroTimes ct = new CadastroTimes();
+        ct.setVisible(true);
+
     }//GEN-LAST:event_btCriarNovoTorneioActionPerformed
 
     private void btnTelaCadastrar5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTelaCadastrar5ActionPerformed

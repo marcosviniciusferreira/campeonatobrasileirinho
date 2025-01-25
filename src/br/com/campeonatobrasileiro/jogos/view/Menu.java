@@ -15,15 +15,12 @@ public class Menu extends javax.swing.JFrame {
         setExtendedState(NORMAL);
         Color col = new Color(25, 28, 97);
         getContentPane().setBackground(col);
-
-        Torneio torneio = new Torneio();
-
+        
         if (Torneio.listaEquipes == null) {
-            Torneio.listaEquipes = new ArrayList<>();
-            Time time1 = new Time("aaa", "a", "SP", 2, 5, 2, 3, 2);;
-            Time time2 = new Time("bbb", "b", "SP", 3, 4, 3, 2, 3);
-            
+            Torneio.CriarNovoTorneio();
         }
+//        Time time1 = new Time("aaa", "a", "SP", 2, 5, 2, 3, 2);;
+//        Time time2 = new Time("bbb", "b", "SP", 3, 4, 3, 2, 3);
     }
 
     @SuppressWarnings("unchecked")
@@ -43,6 +40,7 @@ public class Menu extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAutoRequestFocus(false);
         setBackground(new java.awt.Color(25, 30, 99));
+        setPreferredSize(new java.awt.Dimension(1122, 620));
 
         jPanel1.setBackground(new java.awt.Color(25, 30, 99));
 
@@ -55,7 +53,7 @@ public class Menu extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(37, 37, 37)
+                .addGap(490, 490, 490)
                 .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -68,9 +66,10 @@ public class Menu extends javax.swing.JFrame {
         );
 
         btnSair.setBackground(new java.awt.Color(199, 254, 1));
-        btnSair.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnSair.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnSair.setForeground(new java.awt.Color(25, 30, 99));
         btnSair.setText("Sair");
+        btnSair.setPreferredSize(new java.awt.Dimension(130, 50));
         btnSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSairActionPerformed(evt);
@@ -78,9 +77,10 @@ public class Menu extends javax.swing.JFrame {
         });
 
         btCampeonato.setBackground(new java.awt.Color(199, 254, 1));
-        btCampeonato.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btCampeonato.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btCampeonato.setForeground(new java.awt.Color(25, 30, 99));
         btCampeonato.setText("Campeonato");
+        btCampeonato.setPreferredSize(new java.awt.Dimension(130, 50));
         btCampeonato.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btCampeonatoMouseClicked(evt);
@@ -108,9 +108,10 @@ public class Menu extends javax.swing.JFrame {
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/campeonatobrasileiro/jogos/images/Logo 200x verde.png"))); // NOI18N
 
         btCadastroTimes.setBackground(new java.awt.Color(199, 254, 1));
-        btCadastroTimes.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btCadastroTimes.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btCadastroTimes.setForeground(new java.awt.Color(25, 30, 99));
         btCadastroTimes.setText("Cadastrar Times");
+        btCadastroTimes.setPreferredSize(new java.awt.Dimension(130, 50));
         btCadastroTimes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btCadastroTimesActionPerformed(evt);
@@ -118,9 +119,10 @@ public class Menu extends javax.swing.JFrame {
         });
 
         btCadastroJogos.setBackground(new java.awt.Color(199, 254, 1));
-        btCadastroJogos.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btCadastroJogos.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btCadastroJogos.setForeground(new java.awt.Color(25, 30, 99));
         btCadastroJogos.setText("Reportar Resultados");
+        btCadastroJogos.setPreferredSize(new java.awt.Dimension(130, 50));
         btCadastroJogos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btCadastroJogosActionPerformed(evt);
@@ -128,9 +130,10 @@ public class Menu extends javax.swing.JFrame {
         });
 
         btStatusTmimes.setBackground(new java.awt.Color(199, 254, 1));
-        btStatusTmimes.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btStatusTmimes.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btStatusTmimes.setForeground(new java.awt.Color(25, 30, 99));
         btStatusTmimes.setText("Times");
+        btStatusTmimes.setPreferredSize(new java.awt.Dimension(130, 50));
         btStatusTmimes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btStatusTmimesActionPerformed(evt);
@@ -146,38 +149,38 @@ public class Menu extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(253, 253, 253)
-                        .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(btCampeonato, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE)
+                        .addComponent(btCampeonato, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btCadastroTimes, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
+                        .addComponent(btCadastroTimes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btStatusTmimes, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
+                        .addComponent(btStatusTmimes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btCadastroJogos, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)))
+                        .addComponent(btCadastroJogos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(472, 472, 472)
+                        .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(236, 236, 236)
+                .addGap(444, 444, 444)
                 .addComponent(jLabel3)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(457, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel3)
-                .addGap(33, 33, 33)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btCampeonato)
-                    .addComponent(btStatusTmimes)
-                    .addComponent(btCadastroJogos)
-                    .addComponent(btCadastroTimes))
-                .addGap(32, 32, 32)
-                .addComponent(btnSair)
+                    .addComponent(btCampeonato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btStatusTmimes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btCadastroJogos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btCadastroTimes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(37, 37, 37)
+                .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );

@@ -552,8 +552,7 @@ public class NovoCampeonato extends javax.swing.JFrame {
     }//GEN-LAST:event_listJornada1ActionPerformed
 
     private void btnTelaCadastrar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTelaCadastrar2ActionPerformed
-        CadastroTimes ct = new CadastroTimes();
-        ct.setVisible(true);
+
     }//GEN-LAST:event_btnTelaCadastrar2ActionPerformed
 
     /**

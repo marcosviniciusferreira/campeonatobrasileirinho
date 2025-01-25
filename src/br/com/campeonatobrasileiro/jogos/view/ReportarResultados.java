@@ -92,19 +92,18 @@ public class ReportarResultados extends javax.swing.JFrame {
 
     private void atualizarVisitante() {
         // Recupera o item selecionado no cbMandante
-        Time selecaoAtual = (Time) cbVisitante.getSelectedItem();
-        Time timeSelecionado = (Time) cbMandante.getSelectedItem();
+        String selecaoAtual = cbVisitante.getSelectedItem().toString();
+        String timeSelecionado = cbMandante.getSelectedItem().toString();
 
-        javax.swing.DefaultComboBoxModel model = new javax.swing.DefaultComboBoxModel();
+        javax.swing.DefaultComboBoxModel<String> model = new javax.swing.DefaultComboBoxModel();
 
         // Limpa os itens existentes no cbVisitante
-        model.removeAllElements();
         model.addElement("Selecione");
 
         if (Torneio.listaEquipes != null) {
             for (Time time : Torneio.listaEquipes) {
-                if (!time.getNome().equals(timeSelecionado.getNome())) {
-                    model.addElement(time);
+                if (!time.getNome().equals(timeSelecionado)) {
+                    model.addElement(time.getNome());
                 }
             }
         }
@@ -116,21 +115,19 @@ public class ReportarResultados extends javax.swing.JFrame {
 
     private void atualizarMandante() {
 
-        Time selecaoAtual = (Time) cbMandante.getSelectedItem();
-        Time timeSelecionado = (Time) cbVisitante.getSelectedItem();
+        String selecaoAtual = cbMandante.getSelectedItem().toString();
+        String timeSelecionado = cbVisitante.getSelectedItem().toString();
 
-        javax.swing.DefaultComboBoxModel model = new javax.swing.DefaultComboBoxModel();
+        javax.swing.DefaultComboBoxModel<String> model = new javax.swing.DefaultComboBoxModel();
 
         // Limpa os itens existentes no cbVisitante
-        model.removeAllElements();
-
         model.addElement("Selecione");
 
         // Adiciona somente os times diferentes do selecionado no cbMandante
         if (Torneio.listaEquipes != null) {
             for (Time time : Torneio.listaEquipes) {
-                if (!time.getNome().equals(timeSelecionado.getNome())) {
-                    model.addElement(time);
+                if (!time.getNome().equals(timeSelecionado)) {
+                    model.addElement(time.getNome());
                 }
             }
         }
@@ -535,17 +532,17 @@ public class ReportarResultados extends javax.swing.JFrame {
                         .addContainerGap())))
         );
 
-        javax.swing.DefaultComboBoxModel model = new javax.swing.DefaultComboBoxModel();
+        javax.swing.DefaultComboBoxModel <String> modeloVisitante = new javax.swing.DefaultComboBoxModel();
 
-        model.addElement("Selecione");
+        modeloVisitante.addElement("Selecione");
 
         // Adiciona as equipes ao JComboBox
         if (Torneio.listaEquipes != null) {
             for (Time time : Torneio.listaEquipes) {
-                model.addElement(time); // Corrigido para cbVisitante
+                modeloVisitante.addElement(time.getNome());
             }
         }
-        cbVisitante.setModel(model);
+        cbVisitante.setModel(modeloVisitante);
         cbVisitante.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbVisitanteActionPerformed(evt);
@@ -573,13 +570,13 @@ public class ReportarResultados extends javax.swing.JFrame {
         jLabel20.setForeground(new java.awt.Color(199, 254, 1));
         jLabel20.setText("Mandante");
 
-        javax.swing.DefaultComboBoxModel modeloMandante = new javax.swing.DefaultComboBoxModel();
+        javax.swing.DefaultComboBoxModel<String> modeloMandante = new javax.swing.DefaultComboBoxModel<>();
 
         modeloMandante.addElement("Selecione");
 
         if (Torneio.listaEquipes != null) {
             for (Time time : Torneio.listaEquipes) {
-                modeloMandante.addElement(time); // Adiciona o objeto Time diretamente ao modelo
+                modeloMandante.addElement(time.getNome());
             }
         }
         cbMandante.setModel(modeloMandante);
@@ -808,52 +805,49 @@ public class ReportarResultados extends javax.swing.JFrame {
         if (golsM > golsV) {
             for (Time timeM : listaEquipes) {
                 if (timeM.getNome().equals(cbMandante.getSelectedItem())) {
-                    timeM.JogoVencido(timeM, 1);
+                    timeM.JogoVencido(timeM);
                     timeM.AtualizaPontos(timeM);
                 }
-
-                for (Time derrotadoV : listaEquipes) {
-                    if (derrotadoV.getNome().equals(cbVisitante.getSelectedItem())) {
-                        derrotadoV.JogoPerdido(derrotadoV, 1);
-                        derrotadoV.AtualizaPontos(derrotadoV);
-                    }
+            }
+            for (Time derrotadoV : listaEquipes) {
+                if (derrotadoV.getNome().equals(cbVisitante.getSelectedItem())) {
+                    derrotadoV.JogoPerdido(derrotadoV);
                 }
             }
         } else if (golsV > golsM) {
             for (Time timeV : listaEquipes) {
                 if (timeV.getNome().equals(cbVisitante.getSelectedItem())) {
-                    timeV.JogoVencido(timeV, 1);
+                    timeV.JogoVencido(timeV);
                     timeV.AtualizaPontos(timeV);
                 }
             }
 
             for (Time derrotadoM : listaEquipes) {
                 if (derrotadoM.getNome().equals(cbMandante.getSelectedItem())) {
-                    derrotadoM.JogoPerdido(derrotadoM, 1);
-                    derrotadoM.AtualizaPontos(derrotadoM);
+                    derrotadoM.JogoPerdido(derrotadoM);
                 }
             }
         } else {
             for (Time timeEM : listaEquipes) {
                 if (timeEM.getNome().equals(cbMandante.getSelectedItem())) {
-                    timeEM.JogoEmpatado(timeEM, 1);
+                    timeEM.JogoEmpatado(timeEM);
                     timeEM.AtualizaPontos(timeEM);
                 }
             }
 
             for (Time timeEV : listaEquipes) {
                 if (timeEV.getNome().equals(cbVisitante.getSelectedItem())) {
-                    timeEV.JogoEmpatado(timeEV, 1);
+                    timeEV.JogoEmpatado(timeEV);
                     timeEV.AtualizaPontos(timeEV);
                 }
             }
         }
-        
-        
-        
+
         DefaultTableModel model = (DefaultTableModel) tblResultados.getModel();
         // Preencher a tabela apenas se lis+taEquipes não estiver vazia
-        for (int time = 0; time < Torneio.listaEquipes.size(); time++) {
+        for (int time = 0;
+                time < Torneio.listaEquipes.size();
+                time++) {
             model.addRow(new Object[]{
                 Torneio.listaEquipes.get(time).getNome(),
                 Torneio.listaEquipes.get(time).getPontos(),
@@ -864,8 +858,8 @@ public class ReportarResultados extends javax.swing.JFrame {
         }
 
         Negrito(tblResultados);
+
         OrdenaPorPontos(tblResultados);
-        
         ;
     }//GEN-LAST:event_btCadastrarResultadoActionPerformed
 
@@ -883,16 +877,24 @@ public class ReportarResultados extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ReportarResultados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ReportarResultados.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ReportarResultados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ReportarResultados.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ReportarResultados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ReportarResultados.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ReportarResultados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ReportarResultados.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>

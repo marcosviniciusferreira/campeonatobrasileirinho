@@ -39,4 +39,13 @@ public static String nomesTimes() {
     public void setlistaEquipes(ArrayList<Time> cadastroEquipes) {
         this.listaEquipes = cadastroEquipes;
     }
+    
+    public static void CriarNovoTorneio(){
+        Torneio torneio = new Torneio();
+        torneio.setTotalEquipes(0);
+        if (Torneio.listaEquipes == null) {
+        Torneio.listaEquipes = new ArrayList<>();
+    } else {
+            Torneio.listaEquipes.clear();
+        }}
 }

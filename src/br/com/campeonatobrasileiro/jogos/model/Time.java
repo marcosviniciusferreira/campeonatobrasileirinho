@@ -48,10 +48,6 @@ public final class Time {
         this.empates = empates;
         this.qtd_jogadores = qtd_jogadores;
         
-        // Adiciona o Time à lista de equipes
-        if (Torneio.listaEquipes == null) {
-            Torneio.listaEquipes = new ArrayList<>();
-        }
         Torneio.listaEquipes.add(this);
 
         // Atualiza o número total de equipes
@@ -72,29 +68,27 @@ public final class Time {
     }
     
     public void AtualizaPontos(Time time){
-        time.JogoVencido(time, time.getVitorias());
-        time.JogoEmpatado(time, time.getEmpates());
+        time.setPontos((time.getVitorias()*3)+(time.getEmpates()*1));
     }
     
     public int getJogos(){
-     int jogos = this.getDerrotas()+this.getEmpates()+this.getVitorias();
+     int jogos = this.getVitorias()+this.getEmpates()+this.getDerrotas();
      return jogos;
     }
     
-    public void JogoVencido(Time time, int vitorias){
-        time.setPontos(time.getPontos() + (3 * vitorias));
-        time.setVitorias(time.getVitorias()+vitorias);
+    public void JogoVencido(Time time){
+        time.setVitorias(time.getVitorias()+1);
+        time.setPontos(time.getPontos() + 3);
     }
     
-    public void JogoEmpatado(Time time, int empates){
-        time.setPontos(time.getPontos() + (1*empates));
-        time.setEmpates(time.getEmpates()+empates);
+    public void JogoEmpatado(Time time){
+        time.setEmpates(time.getEmpates()+1);
+        time.setPontos(time.getPontos() + 1);
     }
     
-    public void JogoPerdido(Time time, int derrotas){
+    public void JogoPerdido(Time time){
         time.setDerrotas(time.getDerrotas()+1);
     }
-    
 
     public String getNome() {
         return nome;
